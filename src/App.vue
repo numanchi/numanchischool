@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <Navbar />
+    <Sidebar />
     <v-main>
       <router-view/>
     </v-main>
@@ -9,9 +10,10 @@
 
 <script>
 import Navbar from './components/Navbar.vue'
+import Sidebar from './components/Sidebar.vue'
 export default {
   name: 'App',
-  components: { Navbar },
+  components: { Navbar, Sidebar },
   data: () => ({
     //
   }),
@@ -88,7 +90,7 @@ img {
   cursor: pointer;
   img { transition: all 300ms; }
   &:hover {
-    z-index: 1;
+    z-index: .9;
     img { transform: scale(1.2); }
   }
 }

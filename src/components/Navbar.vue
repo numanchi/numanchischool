@@ -1,5 +1,5 @@
 <template>
-  <div style="z-index: 999;">
+  <div style="z-index: 1;">
     <div class="top__header">
       <div class="top__header__left">
         <div style="max-width: 70px"><img src="https://psc.gov.np/assets/public/images/govlogo_new.png" alt="Logo"></div>
@@ -11,7 +11,8 @@
       </div>
     </div>
     <v-app-bar elevate-on-scroll color="primary" dark :height="height" id="appbar">
-      <ul class="parent__nav">
+      <v-app-bar-nav-icon class="d-block d-sm-none" id="toggle" @click="setDrawer(!drawer)" />
+      <ul class="parent__nav d-none d-sm-flex">
         <li v-for="(menu, m) in menus" :key="m">
           <v-btn color="white" text tile :to="menu.to">
             <span>{{ menu.name }}</span>
@@ -31,6 +32,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'NavbarComponent',  
   data: () => ({
@@ -68,6 +70,14 @@ export default {
       { name: 'Contact us', to: '/contact-us' }
     ]
   }),
+  computed: {
+    ...mapState(['drawer'])
+  },
+  methods: {
+    ...mapMutations({
+      setDrawer: 'SET_DRAWER',
+    }),
+  },
   created() {
     window.addEventListener('scroll', () => {
       let x = window.scrollY
@@ -75,9 +85,13 @@ export default {
         document.getElementById('appbar').style.position = 'fixed'
         document.getElementById('appbar').style.top = '0'
         this.height = 60
+        document.getElementById('toggle').style.height = '45px'
+        document.getElementById('toggle').style.width = '45px'
       } else {
         document.getElementById('appbar').style.position = 'relative'
         this.height = 36
+        document.getElementById('toggle').style.height = '30px'
+        document.getElementById('toggle').style.width = '30px'
       }
     })
   }
@@ -98,12 +112,16 @@ export default {
     gap: 6px;
   }
 }
+.v-application--is-ltr .v-toolbar__content > .v-btn.v-btn--icon:first-child { margin-left: 0 !important; }
+.v-app-bar__nav-icon { 
+  .v-icon { font-size: 20px !important; }
+}
 header {
   transition: ease 2000ms;
   .v-toolbar__content {
   padding: 0 12px !important;
   ul {
-    display: flex;
+    // display: flex;
     &.parent__nav { height: 100%; }
     li {
       position: relative;
