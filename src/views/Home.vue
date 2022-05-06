@@ -29,7 +29,7 @@
     <div class="white py-4 py-sm-6 py-md-8 py-lg-10">
       <div class="container">
         <div class="title mb-3">Gallery</div>
-        <div class="gallery">
+        <div class="gallery__home">
           <div class="gallery__item" v-for="(img, i) in gallery" :key="i">
             <img :src="img" alt="" srcset="">
           </div>
