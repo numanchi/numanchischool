@@ -5,15 +5,17 @@
     <v-main>
       <router-view/>
     </v-main>
+    <Footer />
   </v-app>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue'
 import Sidebar from './components/Sidebar.vue'
+import Footer from './components/Footer.vue'
 export default {
   name: 'App',
-  components: { Navbar, Sidebar },
+  components: { Navbar, Sidebar, Footer },
   data: () => ({
     //
   }),
@@ -84,6 +86,7 @@ img {
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
   }
 }
+// gallery items
 .gallery__item {
   border-radius: 6px;
   overflow: hidden;
@@ -93,5 +96,20 @@ img {
     z-index: .9;
     img { transform: scale(1.2); }
   }
+}
+
+// table
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: .5px solid rgb(0 0 0 / 40%);
+  th, td {
+    color: black;
+    font-size: 12px;
+    padding: 8px 6px;
+    line-height: 1.3;
+    border: .5px solid rgb(0 0 0 / 40%);
+  }
+  td { text-align: center; }
 }
 </style>

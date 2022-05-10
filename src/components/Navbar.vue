@@ -3,11 +3,14 @@
     <div class="top__header">
       <div class="top__header__left">
         <div style="max-width: 70px"><img src="https://psc.gov.np/assets/public/images/govlogo_new.png" alt="Logo"></div>
-        <div style="max-width: 200px; font-size: 12px; line-height: 1.2; text-align: justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis eius commodi at voluptatem nostrum</div>
+        <div class="top__header__left__text">
+          <div style="font-size: 15px; font-weight: 500; letter-spacing: 1px;">Agram Infotech College</div>
+          <small class="mt-1" style="letter-spacing: .5px;">Birgunj Nepal</small>
+        </div>
       </div>
       <div class="top__header__right">
         <div style="height: 70px"><img style="object-fit: contain !important;" src="https://psc.gov.np/assets/public/images/nepal_flag.gif" alt="Logo Gif"></div>
-        <p>05:02PM</p>
+        <p id="time">2078/05/06</p>
       </div>
     </div>
     <v-app-bar elevate-on-scroll color="primary" dark :height="height" id="appbar">
@@ -76,7 +79,7 @@ export default {
   methods: {
     ...mapMutations({
       setDrawer: 'SET_DRAWER',
-    }),
+    })
   },
   created() {
     window.addEventListener('scroll', () => {
@@ -110,6 +113,15 @@ export default {
     display: flex;
     align-items: center;
     gap: 6px;
+    .top__header__left__text {
+      max-width: 400px; 
+      line-height: 1.2; 
+      text-align: justify;
+    }
+  }
+  @media (max-width: 600px) {
+    .top__header__left__text { max-width: calc(100% - 70px) !important; }
+    .top__header__right { display: none; }
   }
 }
 .v-application--is-ltr .v-toolbar__content > .v-btn.v-btn--icon:first-child { margin-left: 0 !important; }
@@ -121,7 +133,6 @@ header {
   .v-toolbar__content {
   padding: 0 12px !important;
   ul {
-    // display: flex;
     &.parent__nav { height: 100%; }
     li {
       position: relative;
@@ -144,9 +155,7 @@ header {
         }
       }
       &:hover {
-        ul { 
-          visibility: visible; 
-        }
+        ul { visibility: visible; }
       }
     }
   }
