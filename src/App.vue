@@ -69,22 +69,19 @@ img {
 // gallery
 .gallery__home {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(18%, 1fr));
   gap: 12px;
+  @media (max-width: 1020px) { grid-template-columns: repeat(auto-fill, minmax(23%, 1fr)); }
+  @media (max-width: 820px) { grid-template-columns: repeat(auto-fill, minmax(30%, 1fr)); }
+  @media (max-width: 600px) { grid-template-columns: repeat(auto-fill, minmax(45%, 1fr)); }
 }
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(18%, 1fr));
   gap: 12px;
-  @media (max-width: 900px) {
-    grid-template-columns: repeat(auto-fill, minmax(18%, 1fr));
-  }
-  @media (max-width: 760px) {
-    grid-template-columns: repeat(auto-fill, minmax(23%, 1fr));
-  }
-  @media (max-width: 600px) {
-    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-  }
+  @media (max-width: 900px) { grid-template-columns: repeat(auto-fill, minmax(23%, 1fr)); }
+  @media (max-width: 760px) { grid-template-columns: repeat(auto-fill, minmax(30%, 1fr)); }
+  @media (max-width: 600px) { grid-template-columns: repeat(auto-fill, minmax(45%, 1fr)); }
 }
 // gallery items
 .gallery__item {

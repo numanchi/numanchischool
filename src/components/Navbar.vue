@@ -1,164 +1,34 @@
 <template>
-  <div style="z-index: 1;">
-    <div class="top__header">
-      <div class="top__header__left">
-        <div style="max-width: 70px"><img src="https://psc.gov.np/assets/public/images/govlogo_new.png" alt="Logo"></div>
-        <div class="top__header__left__text">
-          <div style="font-size: 15px; font-weight: 500; letter-spacing: 1px;">Agram Infotech College</div>
-          <small class="mt-1" style="letter-spacing: .5px;">Birgunj Nepal</small>
-        </div>
-      </div>
-      <div class="top__header__right">
-        <div style="height: 70px"><img style="object-fit: contain !important;" src="https://psc.gov.np/assets/public/images/nepal_flag.gif" alt="Logo Gif"></div>
-        <p id="time">2078/05/06</p>
-      </div>
+  <v-app-bar app color="white" height="70" elevate-on-scroll>
+    <div class="d-flex align-center title">
+      <b class="primary--text" @click="goto">TRMC</b>
+    </div>  
+    <v-spacer />
+    <div class="nav d-none d-sm-none d-md-block">
+      <v-btn text rounded v-for="(nav, n) in items" :key="n" :to="nav.to" color="primary">
+        <span>{{ nav.title }}</span>
+      </v-btn>
     </div>
-    <v-app-bar elevate-on-scroll color="primary" dark :height="height" id="appbar">
-      <v-app-bar-nav-icon class="d-block d-sm-none" id="toggle" @click="setDrawer(!drawer)" />
-      <ul class="parent__nav d-none d-sm-flex">
-        <li v-for="(menu, m) in menus" :key="m">
-          <v-btn color="white" text tile :to="menu.to">
-            <span>{{ menu.name }}</span>
-            <v-icon v-text="'mdi-menu-down'" right v-if="menu.children" />
-          </v-btn>  
-          <ul v-if="menu.children">
-            <li v-for="(child, c) in menu.children" :key="c">
-              <v-btn color="primary" text tile :to="child.to" block>
-                <span>{{ child.name }}</span>
-              </v-btn>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </v-app-bar> 
-  </div> 
+    <v-spacer />
+    <v-btn class="elevation-0" color="primary" rounded to="/login">Join Now</v-btn>  
+    <v-app-bar-nav-icon @click.stop="setDrawer(!drawer)" class="white d-block d-sm-block d-md-none ml-1" /> 
+  </v-app-bar>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex'
 export default {
-  name: 'NavbarComponent',  
-  data: () => ({
-    height: 36,
-    menus: [
-      { name: 'Home', to: '/' },
-      {
-        name: 'Notice', to: '/notice',
-        children: [
-          { name: 'general', to: '/notice/general' },
-          { name: 'exam notice', to: '/notice/exam-notice' },
-          { name: 'admission', to: '/notice/admission' },
-          { name: 'forms', to: '/notice/forms' },
-          { name: 'syllabus', to: '/notice/syllabus' }
-        ]
-      },
-      { 
-        name: 'faculty', to: '/faculty',
-        children: [
-          { name: 'management', to: '/faculty/management' },
-          { name: 'science', to: '/faculty/sceince' },
-          { name: 'humanities', to: '/faculty/humanities' },
-          { name: 'education', to: '/faculty/education' },
-          { name: 'BBA', to: '/faculty/bba' }
-        ]
-      },
-      {
-        name: 'About us', to: '/about',
-        children: [
-          { name: 'About College', to: '/about/about-college' },
-          { name: 'staffs description', to: '/about/staffs' },
-          { name: 'gallery', to: '/about/gallery' }
-        ]
-      },
-      { name: 'Contact us', to: '/contact-us' }
-    ]
-  }),
-  computed: {
-    ...mapState(['drawer'])
-  },
+  name: 'NavbarComponent',
   methods: {
+    goto() {
+      if(this.$route.path !== '/') this.$router.push('/')
+    },
     ...mapMutations({
       setDrawer: 'SET_DRAWER',
-    })
+    }),
   },
-  created() {
-    window.addEventListener('scroll', () => {
-      let x = window.scrollY
-      if(x >= 150) {
-        document.getElementById('appbar').style.position = 'fixed'
-        document.getElementById('appbar').style.top = '0'
-        this.height = 60
-        document.getElementById('toggle').style.height = '45px'
-        document.getElementById('toggle').style.width = '45px'
-      } else {
-        document.getElementById('appbar').style.position = 'relative'
-        this.height = 36
-        document.getElementById('toggle').style.height = '30px'
-        document.getElementById('toggle').style.width = '30px'
-      }
-    })
-  }
+  computed: {
+    ...mapState(['drawer']),
+  },
 }
 </script>
-
-<style lang="scss">
-.top__header {
-  height: 100px;
-  padding: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  .top__header__left {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    .top__header__left__text {
-      max-width: 400px; 
-      line-height: 1.2; 
-      text-align: justify;
-    }
-  }
-  @media (max-width: 600px) {
-    .top__header__left__text { max-width: calc(100% - 70px) !important; }
-    .top__header__right { display: none; }
-  }
-}
-.v-application--is-ltr .v-toolbar__content > .v-btn.v-btn--icon:first-child { margin-left: 0 !important; }
-.v-app-bar__nav-icon { 
-  .v-icon { font-size: 20px !important; }
-}
-header {
-  transition: ease 2000ms;
-  .v-toolbar__content {
-  padding: 0 12px !important;
-  ul {
-    &.parent__nav { height: 100%; }
-    li {
-      position: relative;
-      .v-btn { height: 100% !important; }
-      ul { 
-        display: none;
-        position: absolute;
-        min-width: 150px;
-        background: white;
-        box-shadow: 0 0 10px 2px rgb(0 0 0 / 15%);
-        border-top-right-radius: 10px;
-        border-bottom-left-radius: 10px;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        visibility: hidden;
-        li {
-          height: 36px;
-          .v-btn { justify-content: flex-start; }
-        }
-      }
-      &:hover {
-        ul { visibility: visible; }
-      }
-    }
-  }
-}
-}
-</style>

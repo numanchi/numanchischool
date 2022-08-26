@@ -5,20 +5,12 @@ import HomeView from '../views/Home.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about', name: 'About', component: () => import(/* webpackChunkName: "about" */ '../views/about/About.vue'),
-    redirect: '/about/about-college',
-    children: [
-      { path: 'about-college', name: 'About Us', component: () => import(/* webpackChunkName: "about" */ '../views/about/AboutCollege.vue') },
-      { path: 'staffs', name: 'Staffs Description', component: () => import(/* webpackChunkName: "staffs" */ '../views/about/AboutCollege.vue') },
-      { path: 'gallery', name: 'Gallery', component: () => import(/* webpackChunkName: "gallery" */ '../views/about/Gallery.vue') }
-    ]
-  }
+  { path: '/', name: 'home', component: HomeView },
+  { path: '/courses', name: 'Courses', component: () => import(/* webpackChunkName: "courses" */ '../views/Courses.vue') },
+  { path: '/staffs', name: 'Staffs Description', component: () => import(/* webpackChunkName: "staffs" */ '../views/Staffs.vue') },
+  { path: '/gallery', name: 'Gallery', component: () => import(/* webpackChunkName: "gallery" */ '../views/Gallery.vue') },
+  { path: '/about', name: 'About Us', component: () => import(/* webpackChunkName: "about" */ '../views/About.vue') },
+  { path: '/contact', name: 'Contact', component: () => import(/* webpackChunkName: "contact" */ '../views/Contact.vue') },
 ]
 
 const router = new VueRouter({
