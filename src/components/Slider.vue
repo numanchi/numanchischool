@@ -1,5 +1,5 @@
 <template> 
-  <v-carousel hide-delimiter-background :cycle="false" :interval="2500" :show-arrows="false" :height="`${height}vh`" delimiter-icon="mdi-minus">
+  <v-carousel hide-delimiter-background :cycle="true" :interval="5000" :show-arrows="false" :height="`${height}vh`" delimiter-icon="mdi-minus">
     <v-carousel-item v-for="(item,i) in items" :key="i" :src="item" />
   </v-carousel>
 </template>

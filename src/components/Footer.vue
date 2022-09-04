@@ -1,5 +1,5 @@
 <template>
-  <v-footer color="white" class="py-6 py-sm-8 py-md-10 py-lg-12 elevation-6" padless>
+  <v-footer color="white" class="py-6 py-sm-8 py-md-10 py-lg-12" padless>
     <v-container class="footer">
       <div class="company">
         <div>
@@ -9,7 +9,7 @@
         <div class="mt-2 para">Top instructor from around the world teach millions of student.</div>
         <div class="socials mt-3">
           <span class="para font-weight-bold black--text">Follow Us : </span>  
-          <v-btn icon small v-for="(social, s) in socials" :key="s" color="secondary" target="_blank" :href="social.to">
+          <v-btn icon small v-for="(social, s) in socials" :key="s" color="primary" target="_blank" :href="social.to">
             <v-icon size="14">{{ social.icon }}</v-icon>
           </v-btn>  
         </div>

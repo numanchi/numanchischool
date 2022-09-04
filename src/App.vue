@@ -1,5 +1,8 @@
 <template>
   <v-app>
+    <v-overlay :value="overlay" v-if="overlay === true" z-index="203">
+      <v-progress-circular indeterminate size="50" />
+    </v-overlay>
     <Navbar />
     <Sidebar />
     <v-main>
@@ -16,9 +19,9 @@ import Footer from './components/Footer.vue'
 export default {
   name: 'App',
   components: { Navbar, Sidebar, Footer },
-  data: () => ({
-    //
-  }),
+  computed: {
+    overlay() { return this.$store.state.overlay },
+  }
 };
 </script>
 
@@ -65,12 +68,33 @@ img {
   width: 100%;
   object-fit: cover;
 }
+// inputs
+.v-text-field--outlined.v-input--is-focused fieldset { border: 1px solid #1976d2 !important; }
+.v-text-field--outlined.v-input--has-state fieldset { border: 1px solid #ff6666 !important; }
+.v-input input, .v-text-field--outlined.v-input--dense .v-label, textarea { font-size: 13px; }
+.v-text-field--outlined fieldset { border-color: rgb(0 0 0 / 25%); }
+.v-input__slot {
+  min-height: 46px !important;
+  .v-input__append-inner { margin-top: 12px !important; }
+}
+.v-input__icon .v-icon.v-icon { font-size: 18px !important; }
+.v-text-field.v-text-field--enclosed .v-text-field__details { 
+  margin-bottom: 0 !important;
+  padding: 0 !important;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] { -moz-appearance: textfield; }
 
 // gallery
 .gallery__home {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(18%, 1fr));
-  gap: 12px;
   @media (max-width: 1020px) { grid-template-columns: repeat(auto-fill, minmax(23%, 1fr)); }
   @media (max-width: 820px) { grid-template-columns: repeat(auto-fill, minmax(30%, 1fr)); }
   @media (max-width: 600px) { grid-template-columns: repeat(auto-fill, minmax(45%, 1fr)); }
@@ -78,7 +102,6 @@ img {
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(18%, 1fr));
-  gap: 12px;
   @media (max-width: 900px) { grid-template-columns: repeat(auto-fill, minmax(23%, 1fr)); }
   @media (max-width: 760px) { grid-template-columns: repeat(auto-fill, minmax(30%, 1fr)); }
   @media (max-width: 600px) { grid-template-columns: repeat(auto-fill, minmax(45%, 1fr)); }
@@ -108,5 +131,35 @@ table {
     border: .5px solid rgb(0 0 0 / 40%);
   }
   td { text-align: center; }
+}
+
+// courses
+.courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+  gap: 20px;
+  .course__item {
+    overflow: hidden;
+    border-radius: 6px;
+    background-color: #fff;
+  }
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+    gap: 16px;
+  }
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    gap: 12px;
+  }
+}
+
+// teachers
+.teachers__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(23%, 1fr));
+  gap: 12px;
+  @media (max-width: 960px) { grid-template-columns: repeat(auto-fit, minmax(30%, 1fr)); }
+  @media (max-width: 760px) { grid-template-columns: repeat(auto-fit, minmax(45%, 1fr)); }
+  @media (max-width: 500px) { grid-template-columns: repeat(auto-fit, minmax(100%, 1fr)); }
 }
 </style>

@@ -23,11 +23,27 @@
       </div>
     </div>
 
+    <!-- Courses -->
+    <CustomSection>
+      <div class="title mb-3">Our Teachers</div>
+      <div class="teachers__container">
+        <TeacherCard v-for="(item, r) in teachers" :key="r" :item="item" />
+      </div>
+    </CustomSection>
+
+    <!-- teachers -->
+    <CustomSection color="grey lighten-3">
+      <div class="title mb-3">Our Courses</div>
+      <div class="courses">
+        <CourseCard v-for="(item, i) in courses" :key="i" :item="item" />
+      </div>
+    </CustomSection>
+
     <!-- gallery -->
     <CustomSection>
       <div class="title mb-3">Gallery</div>
       <div class="gallery__home">
-        <CustomImage style="border-radius: 6px;" v-for="(img, i) in 10" :key="i" :image="`https://picsum.photos/500/300?image=${i * 5 + 10}`" />
+        <CustomImage v-for="(img, i) in 10" :key="i" :image="`https://picsum.photos/500/300?image=${i * 5 + 10}`" />
       </div>
     </CustomSection>
 
@@ -51,31 +67,8 @@
     <CustomSection>
       <div class="title mb-3">Latest Notices</div>
       <div class="pa-4 pa-sm-5 pa-md-6 pa-lg-7 grey lighten-3" style="border-radius: 4px;">
-        <div class="primary pa-4 text-center white--text" style="border-radius: 4px; font-size: 13px;">केन्द्रिय कार्यालयका विज्ञापन देखि सिफारिससम्मका सूचनाहरू</div>
-        <div class="notice__filters my-3 d-flex flex-wrap" style="gap: 6px;">
-          <v-btn large rounded v-for="(a ,i) in notice_filters" :key="i" class="elevation-0" :class="{ 'primary white--text': active_notice === a }" @click="() => active_notice = a">{{ a }}</v-btn>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>बिज्ञापन नं.</th>
-              <th>विवरण</th>
-              <th>पद संख्या</th>
-              <th>अन्तिम मिति</th>
-              <th>दोब्बर दस्तुर मिति</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="a in 5" :key="a">
-              <td>{{ a }}.</td>
-              <td style="text-align: start;">शाखा अधिकृत वा सो सरह, न्याय, न्याय, रा.प. तृतीय पदको जेष्ठता र कार्यसम्पादन मूल्याङ्कनद्वारा हुने बढुवा</td>
-              <td>2</td>
-              <td>2078-10-04</td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-        <v-btn class="elevation-0 mt-3" to="/notice" color="red" rounded dark>view more</v-btn>
+        <NoticeComponent :count="5" />
+        <v-btn class="elevation-0 mt-3" to="/notices" color="red" rounded dark>view more</v-btn>
       </div>
     </CustomSection>
   </div>
@@ -85,17 +78,22 @@
 import Slider from '@/components/Slider.vue'
 import CustomSection from '@/components/CustomSection.vue';
 import CustomImage from '../components/CustomImage.vue'
+import NoticeComponent from '../components/NoticeComponent.vue'
+import CourseCard from '../components/CourseCard.vue'
+import TeacherCard from '../components/TeacherCard.vue'
 export default {
   components: { 
     Slider, 
     CustomSection, 
-    CustomImage 
+    CustomImage,
+    NoticeComponent,
+    CourseCard,
+    TeacherCard
   },
   name: 'HomeView',
-  data: () => ({
-    notice_filters: ['विज्ञापन', 'स्वीकृत नामावली', 'परीक्षा केन्द्र', 'लिखित नतिजा', 'सिफारिस'],
-    active_notice: 'विज्ञापन',
-  })
+  created() {
+    this.get()
+  } 
 }
 </script>
 

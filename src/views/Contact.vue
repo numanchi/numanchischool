@@ -31,7 +31,7 @@
           <v-text-field v-model="form.phone" label="Phone Number*" :counter="10" dense outlined hide-details prepend-inner-icon="mdi-phone" :rules="[ v => !!v || '' ]" />  
         </div>
         <v-textarea v-model="form.message" label="Message" dense outlined hide-details prepend-inner-icon="mdi-message" />    
-        <v-btn rounded max-width="200" color="primary" :disabled="!valid" @click="submit">send message</v-btn>
+        <v-btn rounded large max-width="200" color="primary" :disabled="!valid" @click="submit">send message</v-btn>
       </v-form>  
     </div>
   </CustomSection>

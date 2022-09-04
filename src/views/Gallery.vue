@@ -1,6 +1,6 @@
 <template>
   <div class="gallery pa-3">
-    <CustomImage style="border-radius: 6px;" v-for="(img, i) in 30" :key="i" :image="`https://picsum.photos/500/300?image=${i * 5 + 10}`" />
+    <CustomImage v-for="(img, i) in 50" :key="i" :image="`https://picsum.photos/500/300?image=${i * 5 + 10}`" />
   </div>  
 </template>
 
